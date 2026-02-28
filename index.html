@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Surpresa para Você ✨</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff5f7;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; text-align: center; color: #444;
+            overflow: hidden;
+        }
+        #game-container {
+            background: white; border-radius: 25px; padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); width: 85%; max-width: 400px;
+            border: 2px solid #fce4ec;
+        }
+        .step { display: none; animation: fadeIn 0.5s; }
+        .active { display: block; }
+        h2 { color: #d81b60; font-size: 1.4rem; margin-bottom: 20px; }
+        p { line-height: 1.6; font-size: 1.05rem; }
+        .btn {
+            background: #d81b60; color: white; border: none;
+            padding: 15px 20px; border-radius: 50px; cursor: pointer;
+            margin: 10px 0; font-size: 1rem; width: 100%; transition: 0.3s;
+            font-weight: bold;
+        }
+        .btn:hover { background: #ad1457; transform: scale(1.02); }
+        hr { border: 0; border-top: 1px dashed #f8bbd0; margin: 20px 0; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <div id="step0" class="step active">
+        <h2>Oi, meu bem! ❤️</h2>
+        <p>Tudo bom com você? <br><br> Sei que você estava ansiosa para descobrir onde íamos e aqui está... mas para liberar o convite, você precisa passar no meu pequeno teste de sintonia! rs</p>
+        <p><strong>Se divirta!</strong></p>
+        <button class="btn" onclick="nextStep(1)">Começar o desafio ➔</button>
+    </div>
+
+    <div id="step1" class="step">
+        <h2>Pergunta 1: 🍫</h2>
+        <p>Qual é aquele chocolate (que a gente ama) que derrete na boca e é o nosso favorito?</p>
+        <button class="btn" onclick="alert('Quase! Tenta de novo...')">Laka</button>
+        <button class="btn" onclick="celebrar(); nextStep(2)">Suflair! 😍</button>
+    </div>
+
+    <div id="step2" class="step">
+        <h2>Pergunta 2: 🙏</h2>
+        <p>Quem são os nossos protetores que nos guiam sempre?</p>
+        <p><em>"São Judas Tadeu, São José e..."</em></p>
+        <button class="btn" onclick="celebrar(); nextStep(3)">Nosso Senhor Jesus</button>
+        <button class="btn" onclick="alert('Tente o nome completo, Ele merece! rs')">Jesus</button>
+    </div>
+
+    <div id="step3" class="step">
+        <h2 style="color: #2e7d32;">Parabéns! ✨</h2>
+        <p>Você acertou tudo! Nossa sintonia está impecável.</p>
+        <hr>
+        <p>🍔 <strong>Floriano Burger</strong> (Águas Claras)</p>
+        <p>📅 <strong>Sábado, 07/02</strong></p>
+        <p>🚗 <strong>Passo para te buscar às 19h!</strong></p>
+        <br>
+        <p><strong>E aí, aceita o convite?</strong></p>
+        <button class="btn" style="background: #27ae60;" onclick="enviarWhats()">SIM, EU TOPO! ✅</button>
+        <button id="btn-nao" class="btn" style="background: #e57373; width: auto; padding: 10px 25px;" onmouseover="foge()">Não ❌</button>
+    </div>
+</div>
+
+<script>
+    function nextStep(stepNumber) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + stepNumber).classList.add('active');
+    }
+
+    function celebrar() {
+        confetti({
+            particleCount: 80,
+            spread: 60,
+            origin: { y: 0.6 },
+            colors: ['#d81b60', '#f8bbd0', '#ffd700']
+        });
+    }
+
+    function foge() {
+        const btn = document.getElementById('btn-nao');
+        btn.style.position = 'fixed';
+        btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+        btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    }
+
+    function enviarWhats() {
+        const tel = "5589994733585";
+        const msg = encodeURIComponent("Oii! Eu amei a surpresa! ❤️ Aceito sim, te vejo no Floriano Burger no sábado!");
+        window.location.href = `https://wa.me/${tel}?text=${msg}`;
+    }
+</script>
+
+</body>
+</html>
